@@ -19,7 +19,7 @@ export const ButtonComponent = ({ children, ref, color, ...props }: ButtonProps)
 }
 
 const buttonStyle = tv({
-  base: 'mt-10 w-full pr-3 shadow-lg h-12 bg-secondary text-white rounded-lg duration-300 ease-in-out active:bg-red-700 cursor-pointer flex items-center justify-center',
+  base: 'mt-10 w-full pr-3 shadow-lg h-12 bg-secondary text-white font-bold rounded-lg duration-300 ease-in-out active:bg-red-700 cursor-pointer flex items-center justify-center',
   variants: {
     color: {
       primary: '',
