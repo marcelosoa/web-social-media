@@ -1,10 +1,11 @@
 import { createContext, useState } from "react";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config";
 import { AccountModel } from '../../domain/models'
 
 type AuthenticationContextProps = {
+  signIn: (account: AccountModel) => void
   signUp: (account: AccountModel) => void
   signOut: () => void
   account: AccountModel | null
@@ -16,6 +17,20 @@ export const AuthenticationContext = createContext({} as AuthenticationContextPr
 export function AuthenticationProvider ({children}: {children: React.ReactNode}) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [account, setAccount] = useState<(AccountModel | null)>(null)
+
+  console.log(account, 'account')
+
+  const signIn = async (account: AccountModel) => {
+    setIsLoading(true)
+    try {
+      await signInWithEmailAndPassword(auth, account.email, account.password)
+      setAccount(account)
+    } catch (error) {
+      return error
+    } finally {
+      setIsLoading(false)
+    }
+  }
   
   const signUp = async (account: AccountModel) => {
     setIsLoading(true)
@@ -41,7 +56,7 @@ export function AuthenticationProvider ({children}: {children: React.ReactNode})
   }
 
   return (
-    <AuthenticationContext.Provider value={{ signUp, signOut, isLoading, account }}>
+    <AuthenticationContext.Provider value={{ signUp, signOut, isLoading, account, signIn }}>
       {children}
     </AuthenticationContext.Provider>
   )

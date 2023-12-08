@@ -1,15 +1,18 @@
-import { BrowserRouter } from "react-router-dom"
-import { RouterApp } from "./routes/routes"
-import { AuthenticationProvider } from "./context/authentication"
+import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { RouterApp } from "./routes/routes";
+import { AuthenticationProvider } from "./context/authentication";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthenticationProvider>
+    <AuthenticationProvider>
+      <BrowserRouter>
         <RouterApp />
-      </AuthenticationProvider>
-    </BrowserRouter>
+        <ToastContainer />
+      </BrowserRouter>
+    </AuthenticationProvider>
   );
 }
 
-export default App
+export default App;

@@ -7,8 +7,6 @@ export const RegisterScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  console.log({email, password}, 'formulario de email')
-
   const { signUp, isLoading } = useContext(AuthenticationContext)
 
   return (
